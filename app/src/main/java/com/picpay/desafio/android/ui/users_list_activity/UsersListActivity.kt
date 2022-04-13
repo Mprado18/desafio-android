@@ -1,4 +1,4 @@
-package com.picpay.desafio.android
+package com.picpay.desafio.android.ui.users_list_activity
 
 import android.view.View
 import android.widget.ProgressBar
@@ -8,6 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.picpay.desafio.android.api.PicPayService
+import com.picpay.desafio.android.R
+import com.picpay.desafio.android.api.model.User
+import com.picpay.desafio.android.ui.users_list_activity.recyclerview.UserListAdapter
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +19,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class UsersListActivity : AppCompatActivity(R.layout.activity_users_list) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
@@ -61,7 +65,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     progressBar.visibility = View.GONE
                     recyclerView.visibility = View.GONE
 
-                    Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT)
+                    Toast.makeText(this@UsersListActivity, message, Toast.LENGTH_SHORT)
                         .show()
                 }
 
