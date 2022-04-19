@@ -1,0 +1,37 @@
+Index: app/src/test/java/com/picpay/desafio/android/ExampleService.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.picpay.desafio.android\r\n\r\nimport com.picpay.desafio.android.api.PicPayService\r\nimport com.picpay.desafio.android.api.model.User\r\n\r\nclass ExampleService(\r\n    private val service: PicPayService\r\n) {\r\n\r\n    fun example(): List<User> {\r\n        val users = service.getUsers().execute()\r\n\r\n        return users.body() ?: emptyList()\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/picpay/desafio/android/ExampleService.kt b/app/src/test/java/com/picpay/desafio/android/ExampleService.kt
+--- a/app/src/test/java/com/picpay/desafio/android/ExampleService.kt	(revision 8d6d76d74bfdfadb6636d272d62a4c740af02186)
++++ b/app/src/test/java/com/picpay/desafio/android/ExampleService.kt	(date 1649882478968)
+@@ -1,6 +1,6 @@
+ package com.picpay.desafio.android
+ 
+-import com.picpay.desafio.android.api.PicPayService
++import com.picpay.desafio.android.api.retrofit.service.PicPayService
+ import com.picpay.desafio.android.api.model.User
+ 
+ class ExampleService(
+Index: app/src/test/java/com/picpay/desafio/android/ExampleServiceTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.picpay.desafio.android\r\n\r\nimport com.nhaarman.mockitokotlin2.mock\r\nimport com.nhaarman.mockitokotlin2.whenever\r\nimport com.picpay.desafio.android.api.PicPayService\r\nimport com.picpay.desafio.android.api.model.User\r\nimport junit.framework.Assert.assertEquals\r\nimport org.junit.Test\r\nimport retrofit2.Call\r\nimport retrofit2.Response\r\n\r\nclass ExampleServiceTest {\r\n\r\n    private val api = mock<PicPayService>()\r\n\r\n    private val service = ExampleService(api)\r\n\r\n    @Test\r\n    fun exampleTest() {\r\n        // given\r\n        val call = mock<Call<List<User>>>()\r\n        val expectedUsers = emptyList<User>()\r\n\r\n        whenever(call.execute()).thenReturn(Response.success(expectedUsers))\r\n        whenever(api.getUsers()).thenReturn(call)\r\n\r\n        // when\r\n        val users = service.example()\r\n\r\n        // then\r\n        assertEquals(users, expectedUsers)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/picpay/desafio/android/ExampleServiceTest.kt b/app/src/test/java/com/picpay/desafio/android/ExampleServiceTest.kt
+--- a/app/src/test/java/com/picpay/desafio/android/ExampleServiceTest.kt	(revision 8d6d76d74bfdfadb6636d272d62a4c740af02186)
++++ b/app/src/test/java/com/picpay/desafio/android/ExampleServiceTest.kt	(date 1649882478942)
+@@ -2,7 +2,7 @@
+ 
+ import com.nhaarman.mockitokotlin2.mock
+ import com.nhaarman.mockitokotlin2.whenever
+-import com.picpay.desafio.android.api.PicPayService
++import com.picpay.desafio.android.api.retrofit.service.PicPayService
+ import com.picpay.desafio.android.api.model.User
+ import junit.framework.Assert.assertEquals
+ import org.junit.Test

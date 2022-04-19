@@ -2,21 +2,23 @@ package com.picpay.desafio.android.ui.users_list_activity.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.picpay.desafio.android.api.model.User
-import com.picpay.desafio.android.api.model.repository.UserRepository
 import com.picpay.desafio.android.interactor.GetUsersInteractor
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UsersViewModel(private val userRepository: UserRepository) : ViewModel() {
+class UsersViewModel @Inject constructor(
+    private val getUsersInteractor: GetUsersInteractor
+) : ViewModel() {
 
-    val usersMutableLiveData = MutableLiveData<UsersCommand>()
+    private val usersMutableLiveData = MutableLiveData<UsersCommand>()
+    val mUsersMutableLiveData = usersMutableLiveData
 
     fun getUsers() {
         viewModelScope.launch {
             try {
-                val response = userRepository.getUsersListRemote()
+                val response = getUsersInteractor.getUsersListRemote()
                 usersMutableLiveData.value = UsersCommand.RenderUsers(response)
             } catch (exception: Exception) {
                 usersMutableLiveData.value = UsersCommand.ShowRequestError(true)

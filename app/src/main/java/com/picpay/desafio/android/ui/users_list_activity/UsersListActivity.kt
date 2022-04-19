@@ -41,7 +41,7 @@ class UsersListActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun observe() {
-        viewModel.usersMutableLiveData.observe(this, Observer { users ->
+        viewModel.mUsersMutableLiveData.observe(this, Observer { users ->
             users?.let {
                 userListAdapter.notifyDataSetChanged()
                 when (it) {
